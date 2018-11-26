@@ -26,7 +26,7 @@ class RoomList extends Component {
         <div className="rooms">
         {
           this.state.rooms.map( (room) =>
-          <h3 id="room">{this.state.rooms}</h3>
+          <h3 id="room">{room.name}</h3>
           )
         }
         </div>
