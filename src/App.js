@@ -5,8 +5,6 @@ import './components/RoomList';
 import RoomList from './components/RoomList';
 import './components/MessageList';
 import MessageList from './components/MessageList';
-import './components/ActiveRoom';
-import ActiveRoom from './components/ActiveRoom';
 
 var config = {
   apiKey: "AIzaSyAUvEF3g0VofZ1r-qb4EUou6qrd9_vhUoo",
@@ -19,12 +17,30 @@ var config = {
 firebase.initializeApp(config);
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeRoom: ''
+    }
+  }
+
+  handleRoomClick(e) {
+    this.setState({ activeRoom : e })
+  }
+
   render() {
     return (
       <div className="App">
-        <RoomList firebase={ firebase } />
-        <MessageList firebase={ firebase } />
-        <ActiveRoom firebase={ firebase } />
+        <RoomList
+        firebase={firebase}
+        activeRoom={this.state.activeRoom}
+        handleRoomClick={(e) => this.handleRoomClick(e)}
+        />
+        <MessageList
+        firebase={firebase}
+        activeRoom={this.state.activeRoom}
+        />
       </div>
     );
   }

@@ -4,6 +4,10 @@ class MessageList extends Component {
   constructor(props) {
     super(props);
 
+    this.state= {
+      messages:''
+    }
+
     this.messagesRef = this.props.firebase.database().ref('messages');
   }
 
@@ -17,7 +21,12 @@ class MessageList extends Component {
 
   render() {
     return (
-      <div>Message List</div>
+      <section className='message-list'>
+        this.state.messages.map( (messages) =>
+        <h4 id="message"> {messages.content}</h4>
+        )
+        <div>Message List</div>
+      </section>
     )
   }
 }
