@@ -35,7 +35,9 @@ class RoomList extends Component {
     return(
       <section>
       <section className="room-list">
-        <h2 id="room-list-title>">Bloc Chat</h2>
+        <div>
+          <h2 id="room-list-title>">Bloc Chat</h2>
+        </div>
         <div className="rooms">
         {
           this.state.rooms.map( (room) =>
