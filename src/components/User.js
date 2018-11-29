@@ -11,6 +11,11 @@ class User extends Component {
     });
   }
 
+  signIn = () => {
+    const provider = new this.props.firebase.auth.GoogleAuthProvider();
+    this.props.firebase.auth().signInWithPopup(provider);
+  }
+
   handleSignInClick(e) {
     this.setState({ displayName: e.target.value })
   }
@@ -23,13 +28,10 @@ class User extends Component {
     return(
       <section className="sign-in-sign-out">
         <div>User</div>
-        <button type="button" id="signinButton" onClick={this.props.firebase.auth().signInWithPopup( new this.props.firebase.auth.GoogleAuthProvider())}>Sign-In</button>
+        <button type="button" id="signinButton" onClick={this.signIn}>Sign-In</button>
         <button type="button" id="signoutButton" onClick={this.props.firebase.auth().signOut()}>Sign-Out</button>
         <div id="display-user-name">{
-          if (this.props.displayName === null) {
-            return('Guest');
-          } else {
-            return (this.props.displayName);
+          this.props.displayName ? this.props.displayName : "Guest"
             }
           }</div>
       </section>

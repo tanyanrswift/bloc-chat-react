@@ -32,8 +32,9 @@ class App extends Component {
     this.setState({ activeRoom : e })
   }
 
-  setUser(e) {
-    this.setState({ user : e })
+  setUser(user) {
+    console.log(user)
+    this.setState({ user })
   }
 
   render() {
@@ -52,6 +53,7 @@ class App extends Component {
         <User
         firebase={firebase}
         setUser={(e) => this.setUser(e)}
+        displayName={this.state.displayName}
         />
       </div>
     );
