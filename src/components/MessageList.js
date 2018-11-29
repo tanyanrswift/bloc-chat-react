@@ -3,10 +3,6 @@ import React, {Component} from 'react';
 class MessageList extends Component {
   constructor(props) {
     super(props);
-<<<<<<< HEAD
-  }
-
-=======
 
     this.state= {
       messages: []
@@ -24,7 +20,6 @@ class MessageList extends Component {
   }
 
   render() {
-    console.log(this.state.messages);
     return (
       <section className='message-list'>
         {this.state.messages.filter(
@@ -38,7 +33,6 @@ class MessageList extends Component {
       </section>
     )
   }
->>>>>>> bloc-chat-react-list-messages
 }
 
 export default MessageList;
