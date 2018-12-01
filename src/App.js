@@ -45,15 +45,16 @@ class App extends Component {
         activeRoom={this.state.activeRoom}
         handleRoomClick={(e) => this.handleRoomClick(e)}
         />
-        <MessageList
-        firebase={firebase}
-        activeRoom={this.state.activeRoom}
-        handleRoomClick={(e) => this.handleRoomClick(e)}
-        />
         <User
         firebase={firebase}
         setUser={(e) => this.setUser(e)}
         displayName={this.state.displayName}
+        />
+        <MessageList
+        firebase={firebase}
+        activeRoom={this.state.activeRoom}
+        handleRoomClick={(e) => this.handleRoomClick(e)}
+        user={this.state.user}
         />
       </div>
     );
