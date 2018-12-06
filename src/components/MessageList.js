@@ -21,14 +21,13 @@ class MessageList extends Component {
   }
 
   createNewMessage(e) {
-    console.log('in create new message');
     e.preventDefault();
     if (this.props.activeRoom) {
         const newMessage = this.state.newMessageName
         this.messagesRef.push({
           content: this.state.newMessageName,
           roomId: this.props.activeRoom.key,
-          username: this.props.user.displayName
+          username: this.props.user ? this.props.user.displayName : "Guest"
         })
       } else {
         return ("Please select a room");
@@ -50,7 +49,8 @@ class MessageList extends Component {
               return (this.props.activeRoom.key === message.roomId);
             }).map( (message, index) =>
             <div key={index}>
-              <h4 id="message"> {message.content}</h4>
+              <h4 id="username">{message.username}</h4>
+              <h4 id="message">{message.content}</h4>
               </div>
             )}
           </section>

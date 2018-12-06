@@ -49,6 +49,7 @@ class App extends Component {
         firebase={firebase}
         setUser={(e) => this.setUser(e)}
         displayName={this.state.displayName}
+        user={this.state.user}
         />
         <MessageList
         firebase={firebase}
