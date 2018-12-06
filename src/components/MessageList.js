@@ -21,13 +21,23 @@ class MessageList extends Component {
   }
 
   createNewMessage(e) {
-    const newMessage = this.state.newMessageName
-    this.messagesRef.push({
-      name: this.state.newMessageName
-    });
+    console.log('in create new message');
+    e.preventDefault();
+    if (this.props.activeRoom) {
+        const newMessage = this.state.newMessageName
+        this.messagesRef.push({
+          content: this.state.newMessageName,
+          roomId: this.props.activeRoom.key,
+          username: this.props.user.displayName
+        })
+      } else {
+        return ("Please select a room");
+      }
   }
 
   handleSubmitClick(e) {
+    console.log("in handle submit");
+    console.log(e.target.value);
     this.setState({ newMessageName : e.target.value })
   }
 
@@ -38,19 +48,20 @@ class MessageList extends Component {
           {this.state.messages.filter(
             (message) => {
               return (this.props.activeRoom.key === message.roomId);
-            }).map( (message) =>
-            <div>
+            }).map( (message, index) =>
+            <div key={index}>
               <h4 id="message"> {message.content}</h4>
               </div>
             )}
           </section>
           <section>
-            <form className="form-create-message" onSubmit={this.createNewMessage.bind(this)} />
+            <form className="form-create-message" onSubmit={this.createNewMessage.bind(this)}>
             <label htmlFor="textarea">Write new message here</label>
             <br />
             <input type="text" id="textarea" onChange={this.handleSubmitClick.bind(this)} />
             <br />
             <input type="submit" id="submitButton" />
+            </form>
           </section>
       </section>
     )

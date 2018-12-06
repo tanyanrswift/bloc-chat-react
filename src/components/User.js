@@ -21,11 +21,13 @@ class User extends Component {
   }
 
   handleSignInClick(e) {
+    console.log('sign in')
     this.setState({ displayName: e.target.value })
   }
 
   handleSignOutClick(e) {
-    this.setState({ displayName: e.target.value})
+    console.log('sign out')
+    this.setState({ displayName: null })
   }
 
   render() {
@@ -36,7 +38,6 @@ class User extends Component {
         <button type="button" id="signoutButton" onClick={this.signOut}>Sign-Out</button>
         <div id="display-user-name">{
           this.props.user ? this.props.user.displayName : "Guest"
-            }
           }</div>
       </section>
     )
