@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './RoomList.css';
 
 class RoomList extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class RoomList extends Component {
 
   render() {
     return(
-      <section>
+      <section className="room-list-elements">
       <section className="room-list">
         <div>
           <h2 id="room-list-title>">Bloc Chat</h2>
@@ -54,6 +55,7 @@ class RoomList extends Component {
             <br />
             <input type="submit" id="submitButton" />
           </form>
+          <button onClick= { this.state.deleteRoom }>Delete Room</button>
       </section>
       </section>
     );
