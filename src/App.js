@@ -32,15 +32,15 @@ class App extends Component {
     this.setState({ activeRoom : e })
   }
 
-  deleteRoom() {
-    console.log('delete room');
-    const rooms = this.state.rooms.slice();
-    this.setState( {rooms: this.state.rooms.filter((rooms, roomsIndex, index) => roomsIndex !== index) });
-  }
-
   setUser(user) {
     console.log(user)
     this.setState({ user })
+  }
+
+  deleteRoom() {
+    console.log('delete room');
+    const rooms = this.state.rooms.slice();
+    this.setState( {rooms: this.state.rooms.filter((index, roomIndex) => {return index === roomIndex;}) });
   }
 
   render() {
@@ -50,7 +50,7 @@ class App extends Component {
         firebase={firebase}
         activeRoom={this.state.activeRoom}
         handleRoomClick={(e) => this.handleRoomClick(e)}
-        deleteRoom={ (e) => this.deleteRoom(e)}
+        deleteRoom={() => this.deleteRoom()}
         />
         <User
         firebase={firebase}

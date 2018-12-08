@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './RoomList.css';
 
 class RoomList extends Component {
   constructor(props) {
@@ -22,6 +21,7 @@ class RoomList extends Component {
   }
 
   createNewRoom(e) {
+    e.preventDefault();
     const newRoomName = this.state.newRoomName
     this.roomsRef.push({
       name: this.state.newRoomName
@@ -55,7 +55,7 @@ class RoomList extends Component {
             <br />
             <input type="submit" id="submitButton" />
           </form>
-          <button onClick= { this.state.deleteRoom }>Delete Room</button>
+          <button onClick= { this.props.deleteRoom }>Delete Room</button>
       </section>
       </section>
     );
