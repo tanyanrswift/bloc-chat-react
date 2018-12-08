@@ -22,6 +22,7 @@ class RoomList extends Component {
 
   createNewRoom(e) {
     e.preventDefault();
+    e.target.reset();
     const newRoomName = this.state.newRoomName
     this.roomsRef.push({
       name: this.state.newRoomName
@@ -29,7 +30,7 @@ class RoomList extends Component {
   }
 
   handleSubmitClick(e) {
-    this.setState({ newRoomName : e.target.value })
+    this.setState({ newRoomName : e.target.value });
   }
 
   render() {
@@ -55,7 +56,6 @@ class RoomList extends Component {
             <br />
             <input type="submit" id="submitButton" />
           </form>
-          <button onClick= { this.state.deleteRoom }>Delete Room</button>
       </section>
       </section>
     );

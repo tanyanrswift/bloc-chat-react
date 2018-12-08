@@ -22,6 +22,7 @@ class MessageList extends Component {
 
   createNewMessage(e) {
     e.preventDefault();
+    e.target.reset();
     if (this.props.activeRoom) {
         const newMessage = this.state.newMessageName
         this.messagesRef.push({
