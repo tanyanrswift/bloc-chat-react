@@ -5,27 +5,13 @@ class RoomList extends Component {
     super(props);
 
     this.state = {
-      rooms: [],
       newRoomName: '',
     };
-
-    this.roomsRef = this.props.firebase.database().ref('rooms');
-  }
-
-  componentDidMount() {
-    this.roomsRef.on('child_added', snapshot => {
-      const room = snapshot.val();
-      room.key = snapshot.key;
-      this.setState({ rooms: this.state.rooms.concat( room ) })
-    });
   }
 
   createNewRoom(e) {
     e.preventDefault();
-    const newRoomName = this.state.newRoomName
-    this.roomsRef.push({
-      name: this.state.newRoomName
-    });
+    this.props.createNewRoom(e);
   }
 
   handleSubmitClick(e) {
@@ -41,8 +27,12 @@ class RoomList extends Component {
         </div>
         <div className="rooms">
         {
-          this.state.rooms.map( (room) =>
-          <h3 id="room" onClick={ () => this.props.handleRoomClick(room)}>{room.name}</h3>
+          this.props.rooms.map( (room) =>
+          <h3
+            key={room.key}
+            id="room"
+            onClick={ () => this.props.handleRoomClick(room)}
+          >{room.name}</h3>
           )
         }
         </div>

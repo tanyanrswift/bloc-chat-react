@@ -24,8 +24,19 @@ class App extends Component {
 
     this.state = {
       activeRoom: '',
-      user: ''
+      user: '',
+      rooms: []
     }
+
+    this.roomsRef = firebase.database().ref('rooms');
+  }
+
+  componentDidMount() {
+    this.roomsRef.on('child_added', snapshot => {
+      const room = snapshot.val();
+      room.key = snapshot.key;
+      this.setState({ rooms: this.state.rooms.concat( room ) })
+    });
   }
 
   handleRoomClick(e) {
@@ -37,10 +48,21 @@ class App extends Component {
     this.setState({ user })
   }
 
+  createNewRoom(e) {
+    e.preventDefault();
+    const newRoomName = this.state.newRoomName
+    this.roomsRef.push({
+      name: this.state.newRoomName
+    });
+  }
+
   deleteRoom() {
     console.log('delete room');
-    const rooms = this.state.rooms.slice();
-    this.setState( {rooms: this.state.rooms.filter((index, roomIndex) => {return index === roomIndex;}) });
+    this.setState({
+      rooms: this.state.rooms.filter(room => {
+        return room.key !== this.state.activeRoom.key;
+      }) 
+    });
   }
 
   render() {
@@ -51,6 +73,8 @@ class App extends Component {
         activeRoom={this.state.activeRoom}
         handleRoomClick={(e) => this.handleRoomClick(e)}
         deleteRoom={() => this.deleteRoom()}
+        createNewRoom={(e) => this.createNewRoom(e)}
+        rooms={this.state.rooms}
         />
         <User
         firebase={firebase}
